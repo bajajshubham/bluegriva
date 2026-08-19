@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Django
+*.sqlite3
+/staticfiles/
+/media/
+
+# Env / secrets
+.env
+
+# Tailwind / Node (inside the theme app, once generated)
+node_modules/
+theme/static/css/dist/
+
+# Editor
+.vscode/
+.idea/

@@ -1,0 +1,10 @@
+# Core framework
+Django>=6.1
+mysqlclient>=2.2.8          # MySQL driver (needs libmysqlclient-dev on the host, see README)
+
+# Interactivity / styling
+django-htmx>=1.29          # adds request.htmx + HtmxMiddleware
+django-tailwind>=4.5       # Tailwind CSS integration
+
+# Config
+python-decouple>=3.8       # reads settings from .env
