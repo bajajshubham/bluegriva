@@ -42,9 +42,21 @@ INSTALLED_APPS = [
     'tailwind',
     'theme',
     'core',
+    'rest_framework',
 ]
 
 TAILWIND_APP_NAME = 'theme'
+
+REST_FRAMEWORK = {
+    # Flutter authenticates with a JWT, not a browser cookie/session.
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ],
+    # Secure by default — individual endpoints can relax this later (e.g. product listing).
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ],
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
