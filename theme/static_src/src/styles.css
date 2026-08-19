@@ -1,5 +1,19 @@
 @import "tailwindcss";
 
+@theme {
+  --color-brand: #03611C;
+  --color-brand-light: #D2EFC7;
+  --color-surface: #F6FCF4;
+  --color-ink: #131E13;
+  --color-ink-muted: #586458;
+
+  --font-sans: "DM Sans", sans-serif;
+  --font-display: "Lora", serif;
+}
+
+
+
+
 /**
   * A catch-all path to Django template files, JavaScript, and Python files
   * that contain Tailwind CSS classes and will be scanned by Tailwind to generate the final CSS file.
