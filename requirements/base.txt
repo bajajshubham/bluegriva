@@ -12,3 +12,6 @@ python-decouple>=3.8       # reads settings from .env
 # For mobile apis
 djangorestframework>=3.18.0
 djangorestframework-simplejwt>=5.5.1
+
+# For images
+pillow>=12.3.0
