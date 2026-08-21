@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'core',
     'rest_framework',
     'catalog',
+    'cart_orders',
 ]
 
 TAILWIND_APP_NAME = 'theme'
@@ -82,6 +83,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'cart_orders.context_processors.cart',
             ],
         },
     },

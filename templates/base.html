@@ -1,28 +1,74 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="h-full">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{% block title %}BlueGriva{% endblock %}</title>
+
+  {% load tailwind_tags %}
+  {% tailwind_css %}
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Lora:wght@400;600&display=swap"
     rel="stylesheet">
 
-  {% load tailwind_tags %}
-  {% tailwind_css %}
-
-  <!-- HTMX: server-driven partial page updates -->
   <script src="https://unpkg.com/htmx.org@2.0.10" defer></script>
-  <!-- Alpine.js: small client-side interactivity (dropdowns, toggles) -->
   <script src="https://unpkg.com/alpinejs@3.15.12/dist/cdn.min.js" defer></script>
+  <style>
+    [x-cloak] {
+      display: none !important;
+    }
+  </style>
 </head>
 
-<body class="font-sans bg-surface text-ink" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
-  {% block content %}
-  BASE
-  {% endblock %}
+<body class="h-full font-sans bg-surface text-ink" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'
+  x-data="{ cartOpen: false }">
+
+  <!-- Announcement bar -->
+  <div class="bg-brand py-2 text-center text-xs text-white">
+    Freshly prepped this morning · Free delivery on orders above ₹399
+  </div>
+
+  <!-- Header -->
+  <header class="flex items-center gap-4 border-b border-ink/10 bg-surface/95 px-8 py-4">
+    <a href="{% url 'catalog:product_list' %}" class="flex items-center gap-2 font-display text-lg text-ink">
+      <span class="flex h-9 w-9 items-center justify-center rounded-full bg-brand-light text-brand">🌿</span>
+      BlueGriva
+    </a>
+
+    <button
+      class="hidden shrink-0 items-center gap-1 rounded-full border border-ink/15 px-3 py-2 text-xs text-ink sm:flex">
+      <span class="text-ink-muted">Delivering to</span>
+      <span class="font-medium">Nashik</span>
+      <span>▾</span>
+    </button>
+
+    <input type="search" placeholder="Search chopped fruits, vegetables and kits"
+      class="flex-1 rounded-full border border-ink/15 bg-white px-4 py-2 text-sm">
+
+    <button
+      class="hidden h-9 w-9 shrink-0 items-center justify-center rounded-full border border-ink/15 sm:flex">👤</button>
+    <button @click="cartOpen = true" class="shrink-0 rounded-full bg-brand px-4 py-2 text-sm text-white">
+      Cart{% if cart_items %} ({{ cart_items|length }}){% endif %}
+    </button>
+  </header>
+
+  {% block content %}{% endblock %}
+
+  <!-- Cart drawer — present on every page, hidden until opened -->
+  <div x-show="cartOpen" x-cloak class="fixed inset-0 z-40 bg-black/40" @click.self="cartOpen = false">
+    <div class="fixed right-0 top-0 flex h-full w-full max-w-sm flex-col bg-white shadow-xl">
+      <div class="flex items-center justify-between border-b border-ink/10 p-4">
+        <h2 class="font-display text-lg text-ink">Your cart</h2>
+        <button @click="cartOpen = false" class="text-xl text-ink-muted">&times;</button>
+      </div>
+      <div class="flex-1 overflow-y-auto p-4">
+        {% include "cart_orders/_cart_summary.html" %}
+      </div>
+    </div>
+  </div>
 </body>
 
 </html>
