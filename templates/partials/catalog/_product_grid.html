@@ -23,7 +23,7 @@
 
   <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
     {% for product in products %}
-      {% include "partials/_product_card.html" %}
+            {% include "partials/catalog/_product_card.html" %}
     {% empty %}
       <p class="text-ink-muted">No products yet, add some in the admin.</p>
     {% endfor %}
