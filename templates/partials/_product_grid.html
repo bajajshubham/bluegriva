@@ -1,0 +1,32 @@
+<section id="products" class="mx-auto max-w-[1280px] px-8 py-16">
+
+  <div class="mb-8 flex flex-wrap items-end justify-between gap-4">
+    <div>
+      <p class="text-xs font-bold uppercase tracking-[2.4px] text-brand">Fresh from the prep room</p>
+      <h2 class="font-display text-4xl font-bold text-ink">What are you cooking today?</h2>
+    </div>
+    <p class="max-w-md text-sm text-ink-muted">Prepared in small batches throughout the day for peak freshness.</p>
+  </div>
+
+  <div class="mb-6 flex flex-wrap gap-2">
+    <a href="{% url 'catalog:product_list' %}"
+       class="rounded-full border px-5 py-2.5 text-sm font-semibold {% if not active_category %}border-brand bg-brand text-white{% else %}border-border bg-white text-ink{% endif %}">
+      All produce
+    </a>
+    {% for category in categories %}
+      <a href="?category={{ category.slug }}"
+         class="rounded-full border px-5 py-2.5 text-sm font-semibold {% if active_category == category.slug %}border-brand bg-brand text-white{% else %}border-border bg-white text-ink{% endif %}">
+        {{ category.name }}
+      </a>
+    {% endfor %}
+  </div>
+
+  <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+    {% for product in products %}
+      {% include "partials/_product_card.html" %}
+    {% empty %}
+      <p class="text-ink-muted">No products yet, add some in the admin.</p>
+    {% endfor %}
+  </div>
+
+</section>

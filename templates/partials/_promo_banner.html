@@ -1,0 +1,26 @@
+{% load icons %}
+{# "Weeknight rescue box" promo — dark brand band linking through to cooking kits. #}
+<section class="mx-auto max-w-[1280px] px-8">
+  <div class="grid grid-cols-1 overflow-hidden rounded-[32px] bg-brand lg:grid-cols-[1fr_0.8fr]">
+
+    <div class="flex flex-col items-start gap-4 p-8 lg:p-16">
+      <p class="text-xs font-bold uppercase tracking-[2.4px] text-white/70">The weeknight rescue box</p>
+      <h2 class="font-display text-4xl font-bold text-white lg:text-5xl">
+        Five dinners. One less thing to think about.
+      </h2>
+      <p class="max-w-md text-base text-white/75">
+        A rotating box of washed, chopped vegetables and thoughtfully paired cooking kits for busy weeks.
+      </p>
+      <a href="#" class="flex items-center gap-1.5 rounded-full bg-surface py-2.5 pl-6 pr-2 text-sm font-medium text-ink">
+        Explore cooking kits
+        {% icon "arrow-right" "size-4" %}
+      </a>
+    </div>
+
+    {# TODO: swap for real meal-prep photography once media pipeline exists #}
+    <div class="flex min-h-[220px] items-center justify-center bg-white/10 text-sm text-white/70">
+      Photo: meal-prep vegetables
+    </div>
+
+  </div>
+</section>

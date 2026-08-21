@@ -1,0 +1,27 @@
+{% load icons %}
+<article class="overflow-hidden rounded-[28px] border border-border bg-white">
+  <div class="relative">
+    <img src="{{ product.image.url }}" alt="{{ product.name }}" class="h-[216px] w-full object-cover">
+    {# Wishlist not built yet — decorative only #}
+    <button type="button" aria-label="Add {{ product.name }} to favourites"
+            class="absolute right-3 top-3 flex size-9 items-center justify-center rounded-full bg-surface shadow">
+      {% icon "heart" "size-4 text-ink" %}
+    </button>
+  </div>
+  <div class="flex flex-col gap-4 p-4">
+    <div>
+      <p class="text-xs font-semibold uppercase tracking-wide text-ink-muted">{{ product.category.name }}</p>
+      <h3 class="font-display text-lg font-bold text-ink">{{ product.name }}</h3>
+      <p class="text-sm text-ink-muted">{{ product.weight_label }} &middot; washed &amp; cut</p>
+    </div>
+    <div class="flex items-center justify-between">
+      <span class="text-lg font-bold text-ink">&#8377;{{ product.price }}</span>
+      <button type="button"
+              hx-post="{% url 'cart_orders:cart_add' product.id %}"
+              hx-target="#cart-panel" hx-swap="outerHTML"
+              class="flex items-center gap-1.5 rounded-full bg-brand py-2 pl-5 pr-2 text-sm font-bold text-white">
+        Add {% icon "plus" "size-4" %}
+      </button>
+    </div>
+  </div>
+</article>

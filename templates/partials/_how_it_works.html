@@ -1,0 +1,21 @@
+{# "From farm to fork" — 3-step process, closes out the home page above the footer. #}
+<section class="bg-brand-wash/50 px-8 py-20">
+  <div class="mx-auto flex max-w-[1280px] flex-col gap-10">
+
+    <div class="flex flex-col items-center gap-2 text-center">
+      <p class="text-xs font-bold uppercase tracking-[2.4px] text-brand">From farm to fork</p>
+      <h2 class="font-display text-4xl font-bold text-ink">Prep work, perfected.</h2>
+    </div>
+
+    <div class="grid grid-cols-1 gap-4 sm:grid-cols-3">
+      {% for step in process_steps %}
+        <article class="rounded-[28px] border border-border bg-white p-8">
+          <p class="text-xs font-bold text-brand">{{ step.number }}</p>
+          <h3 class="mt-4 font-display text-2xl font-bold text-ink">{{ step.title }}</h3>
+          <p class="mt-3 text-sm text-ink-muted">{{ step.description }}</p>
+        </article>
+      {% endfor %}
+    </div>
+
+  </div>
+</section>
