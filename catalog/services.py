@@ -1,6 +1,6 @@
 """Query/business logic for catalog. views.py (HTMX) and, later, api/v1/ (JSON)
 both call these functions — never the other way around."""
-from .models import Product
+from .models import Category, Product
 
 
 def list_active_products(category_slug=None):
@@ -9,3 +9,6 @@ def list_active_products(category_slug=None):
     if category_slug:
         products = products.filter(category__slug=category_slug)
     return products
+
+def list_categories():
+    return Category.objects.all()

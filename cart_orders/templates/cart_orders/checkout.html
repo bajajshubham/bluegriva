@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}Checkout — BlueGriva{% endblock %}
+
+{% block content %}
+<section class="mx-auto max-w-2xl px-8 py-10">
+  <h1 class="font-display text-2xl text-ink">Checkout</h1>
+
+  {% if not items %}
+    <p class="mt-4 text-ink-muted">Your cart is empty. <a href="{% url 'core:home' %}" class="text-brand underline">Go shopping</a>.</p>
+  {% else %}
+    <div class="mt-6 rounded-2xl border border-ink/10 p-4">
+      {% for item in items %}
+        <div class="flex justify-between py-1 text-sm text-ink">
+          <span>{{ item.product.name }} × {{ item.quantity }}</span>
+          <span>₹{{ item.line_total }}</span>
+        </div>
+      {% endfor %}
+      <div class="mt-2 flex justify-between border-t border-ink/10 pt-2 font-medium text-ink">
+        <span>Total</span><span>₹{{ total }}</span>
+      </div>
+    </div>
+
+    <form method="post" class="mt-6 space-y-4">
+      {% csrf_token %}
+      <div>
+        <label class="text-sm text-ink-muted">Name</label>
+        <input name="guest_name" required class="mt-1 w-full rounded-lg border border-ink/15 px-3 py-2">
+      </div>
+      <div>
+        <label class="text-sm text-ink-muted">Phone</label>
+        <input name="guest_phone" required class="mt-1 w-full rounded-lg border border-ink/15 px-3 py-2">
+      </div>
+      <div>
+        <label class="text-sm text-ink-muted">Delivery address</label>
+        <textarea name="delivery_address" required rows="3" class="mt-1 w-full rounded-lg border border-ink/15 px-3 py-2"></textarea>
+      </div>
+      <p class="text-sm text-ink-muted">Payment: Cash on Delivery</p>
+      <button type="submit" class="w-full rounded-full bg-brand px-6 py-3 font-medium text-white">
+        Place order — ₹{{ total }}
+      </button>
+    </form>
+  {% endif %}
+</section>
+{% endblock %}

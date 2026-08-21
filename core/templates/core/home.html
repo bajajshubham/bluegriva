@@ -1,6 +1,12 @@
 {% extends "base.html" %}
-{% block title %}BlueGriva{% endblock %}
+{% block title %}BlueGriva — Fresh produce, zero prep{% endblock %}
 
 {% block content %}
-
+  {% include "partials/core/_hero.html" %}
+  {% include "partials/core/_trust_badges.html" %}
+  {% include "partials/catalog/_product_grid.html" %}
+  <div class="my-16">
+    {% include "partials/core/_promo_banner.html" %}
+  </div>
+  {% include "partials/core/_how_it_works.html" %}
 {% endblock %}

@@ -6,14 +6,15 @@
 <header class="sticky top-0 z-30 border-b border-border bg-surface/95 backdrop-blur-sm">
   <div class="mx-auto flex max-w-7xl items-center justify-between gap-4 px-8 py-4">
 
-    <a href="{% url 'catalog:product_list' %}" class="flex shrink-0 items-center gap-2">
+    <a href="{% url 'core:home' %}" class="flex shrink-0 items-center gap-2">
       <span class="flex size-10 items-center justify-center rounded-full bg-brand">
         {% icon "leaf" "size-5 text-white" %}
       </span>
       <span class="font-display text-2xl font-bold tracking-tight text-brand">BlueGriva</span>
     </a>
 
-    <button type="button" class="hidden shrink-0 items-center gap-2 rounded-full border border-border px-4 py-2 sm:flex">
+    <button type="button"
+      class="hidden shrink-0 items-center gap-2 rounded-full border border-border px-4 py-2 sm:flex">
       {% icon "map-pin" "size-4 text-ink-muted" %}
       <span class="text-left leading-tight">
         <span class="block text-[10px] font-semibold uppercase tracking-wide text-ink-muted">Delivering to</span>
@@ -26,7 +27,7 @@
       <span class="sr-only">Search products</span>
       {% icon "search" "absolute left-4 top-1/2 -translate-y-1/2 size-4 text-ink-muted" %}
       <input type="search" placeholder="Search chopped fruits, vegetables and kits"
-             class="h-11 w-full rounded-full border border-border bg-brand-wash/60 pl-11 pr-4 text-sm text-ink placeholder:text-ink-muted focus:outline-none focus:ring-2 focus:ring-brand">
+        class="h-11 w-full rounded-full border border-border bg-brand-wash/60 pl-11 pr-4 text-sm text-ink placeholder:text-ink-muted focus:outline-none focus:ring-2 focus:ring-brand">
     </label>
 
     <div class="flex shrink-0 items-center gap-2">
@@ -34,7 +35,7 @@
         {% icon "user" "size-4 text-ink" %}
       </button>
       <button type="button" @click="cartOpen = true"
-              class="flex items-center gap-1.5 rounded-full bg-brand py-2 pl-2 pr-4 text-sm font-medium text-white">
+        class="flex items-center gap-1.5 rounded-full bg-brand py-2 pl-2 pr-4 text-sm font-medium text-white">
         {% icon "cart" "size-4" %}
         Cart{% if cart_items %} ({{ cart_items|length }}){% endif %}
       </button>

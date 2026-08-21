@@ -1,4 +1,4 @@
-<section id="products" class="mx-auto max-w-[1280px] px-8 py-16">
+<section id="products" class="mx-auto max-w-7xl px-8 py-16">
 
   <div class="mb-8 flex flex-wrap items-end justify-between gap-4">
     <div>
@@ -9,7 +9,7 @@
   </div>
 
   <div class="mb-6 flex flex-wrap gap-2">
-    <a href="{% url 'catalog:product_list' %}"
+    <a href="{% url 'core:home' %}"
        class="rounded-full border px-5 py-2.5 text-sm font-semibold {% if not active_category %}border-brand bg-brand text-white{% else %}border-border bg-white text-ink{% endif %}">
       All produce
     </a>

@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Order confirmed — BlueGriva{% endblock %}
+
+{% block content %}
+<section class="mx-auto max-w-2xl px-8 py-10 text-center">
+  <h1 class="font-display text-2xl text-ink">Order #{{ order.id }} confirmed</h1>
+  <p class="mt-2 text-ink-muted">We'll get this fresh and packed for you shortly.</p>
+
+  <div class="mt-6 rounded-2xl border border-ink/10 p-4 text-left">
+    {% for item in order.items.all %}
+      <div class="flex justify-between py-1 text-sm text-ink">
+        <span>{{ item.product.name }} × {{ item.quantity }}</span>
+        <span>₹{{ item.line_total }}</span>
+      </div>
+    {% endfor %}
+    <div class="mt-2 flex justify-between border-t border-ink/10 pt-2 font-medium text-ink">
+      <span>Total</span><span>₹{{ order.total_amount }}</span>
+    </div>
+  </div>
+
+  <p class="mt-4 text-sm text-ink-muted">Status: {{ order.get_status_display }} · Cash on Delivery</p>
+  <a href="{% url 'core:home' %}" class="mt-6 inline-block rounded-full border border-ink/20 px-6 py-3 text-sm text-ink">
+    Continue shopping
+  </a>
+</section>
+{% endblock %}
