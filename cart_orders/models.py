@@ -1,8 +1,15 @@
 from django.db import models
 from catalog.models import Product
+from django.conf import settings
 
 
 class Order(models.Model):
+    customer = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.SET_NULL,
+        null=True, blank=True, related_name="orders"
+    )
+    guest_name = models.CharField(max_length=100)
+    
     """A placed order. No account yet, guest details are captured at checkout."""
 
     STATUS_CHOICES = [

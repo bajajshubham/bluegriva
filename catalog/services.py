@@ -3,11 +3,13 @@ both call these functions — never the other way around."""
 from .models import Category, Product
 
 
-def list_active_products(category_slug=None):
+def list_active_products(category_slug=None, search=None):
     """Active products for the storefront grid, optionally filtered by category."""
     products = Product.objects.filter(is_active=True).select_related("category")
     if category_slug:
         products = products.filter(category__slug=category_slug)
+    if search:
+        products = products.filter(name__icontains=search)
     return products
 
 def list_categories():

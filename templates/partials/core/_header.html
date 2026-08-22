@@ -23,15 +23,17 @@
       {% icon "chevron-down" "size-4 text-ink-muted" %}
     </button>
 
-    <label class="relative min-w-0 max-w-xl flex-1">
+    <form method="get" action="{% url 'core:home' %}" class="relative min-w-0 max-w-[576px] flex-1">
       <span class="sr-only">Search products</span>
       {% icon "search" "absolute left-4 top-1/2 -translate-y-1/2 size-4 text-ink-muted" %}
-      <input type="search" placeholder="Search chopped fruits, vegetables and kits"
+      <input type="search" name="q" value="{{ request.GET.q }}" placeholder="Search chopped fruits, vegetables and kits"
         class="h-11 w-full rounded-full border border-border bg-brand-wash/60 pl-11 pr-4 text-sm text-ink placeholder:text-ink-muted focus:outline-none focus:ring-2 focus:ring-brand">
-    </label>
+    </form>
 
     <div class="flex shrink-0 items-center gap-2">
       {% if user.is_authenticated %}
+      <a href="{% url 'accounts:order_history' %}" class="hidden text-xs text-ink-muted hover:text-ink sm:inline">My
+        orders</a>
       <a href="{% url 'accounts:logout' %}"
         class="hidden items-center gap-1 rounded-full border border-border px-3 py-2 text-xs text-ink sm:flex">
         {{ user.phone }} · Log out

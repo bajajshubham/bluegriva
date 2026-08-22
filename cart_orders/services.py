@@ -49,6 +49,18 @@ def get_cart_total(request):
 
 
 def place_order(request, *, guest_name, guest_phone, delivery_address):
+    items = get_cart_items(request)
+    if not items:
+        raise ValueError("Cannot place an order with an empty cart.")
+
+    with transaction.atomic():
+        order = Order.objects.create(
+            customer=request.user if request.user.is_authenticated else None,   # add this line
+            guest_name=guest_name,
+            guest_phone=guest_phone,
+            delivery_address=delivery_address,
+            total_amount=get_cart_total(request),
+        )
     """Converts the session cart into a real Order, atomically, then clears the cart."""
     items = get_cart_items(request)
     if not items:
@@ -72,3 +84,7 @@ def place_order(request, *, guest_name, guest_phone, delivery_address):
         request.session.modified = True
 
     return order
+
+def list_customer_orders(user):
+    """Past orders for a logged-in customer, most recent first."""
+    return Order.objects.filter(customer=user).order_by("-created_at")

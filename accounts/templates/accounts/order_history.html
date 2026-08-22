@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}My Orders — BlueGriva{% endblock %}
+
+{% block content %}
+<section class="mx-auto max-w-2xl px-8 py-10">
+  <h1 class="font-display text-2xl text-ink">My orders</h1>
+
+  {% for order in orders %}
+    <a href="{% url 'cart_orders:order_confirmation' order.id %}"
+       class="mt-4 flex items-center justify-between rounded-2xl border border-border p-4">
+      <div>
+        <p class="font-medium text-ink">Order #{{ order.id }}</p>
+        <p class="text-sm text-ink-muted">{{ order.created_at|date:"d M Y, h:i A" }} · {{ order.get_status_display }}</p>
+      </div>
+      <span class="font-medium text-ink">₹{{ order.total_amount }}</span>
+    </a>
+  {% empty %}
+    <p class="mt-4 text-ink-muted">No orders yet. <a href="{% url 'core:home' %}" class="text-brand underline">Start shopping</a>.</p>
+  {% endfor %}
+</section>
+{% endblock %}

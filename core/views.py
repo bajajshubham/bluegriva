@@ -20,8 +20,9 @@ def home(request):
     """Storefront home page: hero, trust badges, product grid, promo, process steps.
     core assembles the page; catalog owns the product data behind it."""
     category_slug = request.GET.get("category")
+    search = request.GET.get("q", "").strip()
     context = {
-        "products": list_active_products(category_slug),
+        "products": list_active_products(category_slug, search),
         "categories": list_categories(),
         "active_category": category_slug,
         "trust_badges": TRUST_BADGES,

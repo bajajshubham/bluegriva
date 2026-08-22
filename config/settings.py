@@ -50,6 +50,7 @@ INSTALLED_APPS = [
 
 TAILWIND_APP_NAME = 'theme'
 AUTH_USER_MODEL = 'accounts.User'
+LOGIN_URL = '/account/login/'
 
 REST_FRAMEWORK = {
     # Flutter authenticates with a JWT, not a browser cookie/session.

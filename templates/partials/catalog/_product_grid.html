@@ -8,24 +8,35 @@
     <p class="max-w-md text-sm text-ink-muted">Prepared in small batches throughout the day for peak freshness.</p>
   </div>
 
+  {% if request.GET.q %}
+  <div class="mb-4 flex items-center justify-between rounded-xl bg-brand-wash/50 px-4 py-3 text-sm text-ink">
+    <span>Showing results for &ldquo;{{ request.GET.q }}&rdquo;</span>
+    <a href="{% url 'core:home' %}" class="text-brand underline">Clear</a>
+  </div>
+  {% endif %}
+
   <div class="mb-6 flex flex-wrap gap-2">
-    <a href="{% url 'core:home' %}"
-       class="rounded-full border px-5 py-2.5 text-sm font-semibold {% if not active_category %}border-brand bg-brand text-white{% else %}border-border bg-white text-ink{% endif %}">
+    <a href="{% url 'core:home' %}{% if request.GET.q %}?q={{ request.GET.q }}{% endif %}"
+      class="rounded-full border px-5 py-2.5 text-sm font-semibold {% if not active_category %}border-brand bg-brand text-white{% else %}border-border bg-white text-ink{% endif %}">
       All produce
     </a>
     {% for category in categories %}
-      <a href="?category={{ category.slug }}"
-         class="rounded-full border px-5 py-2.5 text-sm font-semibold {% if active_category == category.slug %}border-brand bg-brand text-white{% else %}border-border bg-white text-ink{% endif %}">
-        {{ category.name }}
-      </a>
+    <a href="?category={{ category.slug }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}"
+      class="rounded-full border px-5 py-2.5 text-sm font-semibold {% if active_category == category.slug %}border-brand bg-brand text-white{% else %}border-border bg-white text-ink{% endif %}">
+      {{ category.name }}
+    </a>
     {% endfor %}
   </div>
 
   <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
     {% for product in products %}
-            {% include "partials/catalog/_product_card.html" %}
+    {% include "partials/catalog/_product_card.html" %}
     {% empty %}
-      <p class="text-ink-muted">No products yet, add some in the admin.</p>
+    {% if request.GET.q %}
+    <p class="text-ink-muted">No products match &ldquo;{{ request.GET.q }}&rdquo;.</p>
+    {% else %}
+    <p class="text-ink-muted">No products yet, add some in the admin.</p>
+    {% endif %}
     {% endfor %}
   </div>
 
