@@ -22,6 +22,7 @@ urlpatterns = [
     path('api/v1/', include('mobile_api.v1.urls')),
     path('', include('cart_orders.urls')),
     path('', include('core.urls')),
+    path('', include('accounts.urls')),
 ]
 
 from django.conf import settings

@@ -31,9 +31,17 @@
     </label>
 
     <div class="flex shrink-0 items-center gap-2">
-      <button type="button" aria-label="Account" class="hidden size-9 items-center justify-center rounded-full sm:flex">
+      {% if user.is_authenticated %}
+      <a href="{% url 'accounts:logout' %}"
+        class="hidden items-center gap-1 rounded-full border border-border px-3 py-2 text-xs text-ink sm:flex">
+        {{ user.phone }} · Log out
+      </a>
+      {% else %}
+      <a href="{% url 'accounts:login' %}" aria-label="Log in"
+        class="hidden size-9 items-center justify-center rounded-full sm:flex">
         {% icon "user" "size-4 text-ink" %}
-      </button>
+      </a>
+      {% endif %}
       <button type="button" @click="cartOpen = true"
         class="flex items-center gap-1.5 rounded-full bg-brand py-2 pl-2 pr-4 text-sm font-medium text-white">
         {% icon "cart" "size-4" %}
